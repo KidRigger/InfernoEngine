@@ -10,6 +10,7 @@
 #define engine_hpp
 
 #include <allegro5/allegro.h>
+#include "scene.hpp"
 
 class Engine {
     
