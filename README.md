@@ -1,6 +1,6 @@
 # InfernoEngine
-An allegro based game engine solely for the use of the team. <br>
-<ul>
+An allegro based game engine solely for the use of the team: <br>
+<ul type = "square">
 <li>Anish Bhobe
 <li>Ronak Harkhani
 <li>Mehul Rastogi
