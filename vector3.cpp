@@ -12,6 +12,11 @@
 #include <cmath>
 
 // ---------- CTORS ---------- //
+
+Vector3::Vector3(void){
+    ;
+}
+
 Vector3::Vector3 (float x, float y, float z){
     vec[0] = x;
     vec[1] = y;

@@ -17,6 +17,7 @@ class Vector3 {
 public:
     
     //ctor
+    Vector3 (void);
     Vector3 (float x, float y, float z = 0);
     Vector3 (const Vector3 &copy_from);
     void operator =(const Vector3 &copy_from);
