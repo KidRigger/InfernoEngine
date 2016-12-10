@@ -13,6 +13,8 @@
 
 namespace Renderer {
     
+    void render_scale(int screen_width, int screen_height);
+    
     // 3 vertices and thickness -> 0 for filled.
     void draw_triangle(const Vector3& pt1, const Vector3& pt2,
                        const Vector3& pt3, float thickness);
