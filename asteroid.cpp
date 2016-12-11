@@ -12,7 +12,8 @@
 #include <stdlib.h>
 #include <ctime>
 
-Asteroid::Asteroid(const Vector3& pos_vec, float radius): pos_vec(pos_vec), radius(radius) {
+Asteroid::Asteroid(const Vector3& pos_vec, float radius):
+pos_vec(pos_vec), radius(radius) {
 	srand((int)time(0));
 
 	if(this->radius == 0)
