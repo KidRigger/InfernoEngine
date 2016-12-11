@@ -12,6 +12,18 @@
 
 #include <time.h> 
 
+const static Vector3 shape[3][10] = {
+	{Vector3(0.5,1.5), Vector3(1.5,1), Vector3(1,0.5), Vector3(2.5,0),
+		Vector3(1.5,-1), Vector3(0.5,-1.5), Vector3(-1,-1), Vector3(-1,0),
+		Vector3(-1.5,1), Vector3(-0.5,1)},
+	{Vector3(0,2), Vector3(2,1), Vector3(2,-0.5), Vector3(1.5,-1.5),
+		Vector3(0,-2), Vector3(-1.5,-1), Vector3(-1,-1), Vector3(-2,1),
+		Vector3(-0.5,0.5), Vector3(-1,1.5) },
+	{Vector3(-0.5,2), Vector3(0.5,1.5), Vector3(1.5,2), Vector3(1,0.5),
+		Vector3(1.5,-0.5), Vector3(1.5,-1.5), Vector3(0.5,-1), Vector3(0,-2),
+		Vector3(-1.5,0), Vector3(-1.5,1.5)} };
+
+
 Asteroid::Asteroid(const Vector3& pos_vec, float radius): pos_vec(pos_vec), radius(radius) {
 	srand((int)time(0));
 
@@ -42,5 +54,5 @@ Vector3 Asteroid::GetPosition() {
 }
 
 float Asteroid::GetRadius() {
-	return radius;
+	return 2*radius;
 }
