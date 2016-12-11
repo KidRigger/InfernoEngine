@@ -54,9 +54,5 @@ Vector3 Asteroid::GetPosition() {
 }
 
 float Asteroid::GetRadius() {
-<<<<<<< HEAD
-	return radius;
-=======
 	return 2*radius;
->>>>>>> 65c68d3994094dd315a9b60d70d6c10174ee76b0
 }
