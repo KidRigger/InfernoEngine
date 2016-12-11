@@ -10,11 +10,11 @@
 #define input_hpp
 
 #include <allegro5/keyboard.h>
-#include "vector3.hpp"
 
 class Input
 {
 private:
+    int x[2];
     ALLEGRO_KEYBOARD_STATE keystate;
 public:
     
@@ -23,7 +23,7 @@ public:
     bool Update(void);
     
     //For output of the axes
-    bool GetKeyDown(char key);
+    int GetAxis(int player);
 };
 
 #endif /* input_hpp */

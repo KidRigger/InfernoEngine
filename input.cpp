@@ -7,8 +7,6 @@
 //
 
 #include "input.hpp"
-#include <string.h>
-
 
 Input::Input(void){
     al_install_keyboard();
@@ -17,35 +15,39 @@ Input::Input(void){
 bool Input::Update(void){
     
     al_get_keyboard_state(&keystate);
+            
+    //Player 1 Arrow Up/Down
+    if(al_key_down(&keystate, ALLEGRO_KEY_UP))
+    {
+        x[0] = -1;
+    }
+    else if(al_key_down(&keystate, ALLEGRO_KEY_DOWN))
+    {
+        x[0] = +1;
+    }
+    else
+    {
+        x[0] = 0;
+    }
+    
+    //Player 2 W/S
+    if(al_key_down(&keystate, ALLEGRO_KEY_W))
+    {
+        x[1] = -1;
+    }
+    else if(al_key_down(&keystate, ALLEGRO_KEY_S))
+    {
+        x[1] = 1;
+    }
+    else
+    {
+        x[1] = 0;
+    }
     
     if (al_key_down(&keystate, ALLEGRO_KEY_ESCAPE))
     {
         return false;
     }
     
-    return true;
+    return false;
 }
-
-bool Input::GetKeyDown(char key){
-    key = tolower(key);
-    switch(key){
-        case 'a':
-            return al_key_down(&keystate, ALLEGRO_KEY_A);
-            break;
-        case 's':
-            return al_key_down(&keystate, ALLEGRO_KEY_S);
-            break;
-        case 'w':
-            return al_key_down(&keystate, ALLEGRO_KEY_W);
-            break;
-        case 'd':
-            return al_key_down(&keystate, ALLEGRO_KEY_D);
-            break;
-        case ' ':
-            return al_key_down(&keystate, ALLEGRO_KEY_SPACE);
-            break;
-        default:
-            return false;
-    };
-}
-

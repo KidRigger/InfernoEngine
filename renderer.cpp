@@ -1,4 +1,3 @@
-//--------------------------------------------------------------------------------
 //
 //  renderer.cpp
 //  InfernoEngine
@@ -6,7 +5,6 @@
 //  Created by Anish Bhobe on 12/10/16.
 //  Copyright © 2016 Anish Bhobe. All rights reserved.
 //
-//--------------------------------------------------------------------------------
 
 #include "renderer.hpp"
 
@@ -66,19 +64,6 @@ namespace Renderer {
         }
     }
     
-    void draw_rect(const Vector3& origin,const Vector3& diagonal,float thickness){
-        if(thickness > 0){
-            al_draw_rectangle(origin.GetX(), origin.GetY(),
-                              diagonal.GetX(), diagonal.GetY(),
-                              color_white, thickness);
-        }
-        else {
-            al_draw_filled_rectangle(origin.GetX(), origin.GetY(),
-                                     diagonal.GetX(), diagonal.GetY(),
-                                     color_white);
-        }
-    }
-    
     void draw_point(const Vector3& position) {
         al_draw_pixel(position.GetX()*scale_factor_x,
                       position.GetY()*scale_factor_y,
@@ -87,4 +72,3 @@ namespace Renderer {
     
 }
 
-//--------------------------------------------------------------------------------
