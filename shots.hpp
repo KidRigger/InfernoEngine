@@ -18,6 +18,7 @@ public:
           float move_speed = 5, float radius = 2);
     void Hit(void);
     void Draw(void);
+    void Update(void);
     
     Vector3 GetPosition(void);
     float GetRadius(void);
