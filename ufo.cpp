@@ -11,7 +11,10 @@
 #include "ufo.hpp"
 
 Ufo::Ufo(Vector3 pos_vec, float radius):pos_vec(pos_vec), radius(radius) {
-	;
+	srand((int)time(0));
+	if (radius == 0) {
+		this->radius = (rand() % 5 + 2)*15;
+	}
 }
 
 float Ufo::GetRadius() {
@@ -20,9 +23,11 @@ float Ufo::GetRadius() {
 
 void Ufo::Draw() {
 	for (int i = 0; i < 7; ++i) {
-		Renderer::draw_line(radius*shape[i], radius*shape[i + 1], 3);
+		Renderer::draw_line(pos_vec + radius*shape[i], pos_vec + radius*shape[i + 1], 3);
 	}
-	Renderer::draw_line(radius*shape[7], radius*shape[2], 3);
-	Renderer::draw_line(radius*shape[6], radius*shape[3], 3);
+	Renderer::draw_line(pos_vec + radius*shape[7], pos_vec + radius*shape[0], 3);
+	Renderer::draw_line(pos_vec + radius*shape[7], pos_vec + radius*shape[2], 3);
+	Renderer::draw_line(pos_vec + radius*shape[6], pos_vec + radius*shape[3], 3);
+
 
 }

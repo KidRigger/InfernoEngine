@@ -13,9 +13,14 @@
 
 #include "renderer.hpp"
 
-Vector3 shape[8] = { Vector3(-0.375, 0.75), Vector3(0.375, 0.75), Vector3(0.75, 0.375),
-					 Vector3(1.5, 0), Vector3(0.875, -0.375), Vector3(-0.875, -0.375),
-					 Vector3(-1.5, 0), Vector3(-0.75, 0.375) };
+#include <stdlib.h>
+#include <time.h>
+
+static Vector3 shape[8] = {
+			Vector3(-0.375, -0.75), Vector3(0.375, -0.75), Vector3(0.75, -0.375),
+			Vector3(1.5, 0), Vector3(0.875, 0.375), Vector3(-0.875, 0.375),
+			Vector3(-1.5, 0), Vector3(-0.75, -0.375)
+			};
 
 class Ufo {
 	Vector3 pos_vec;
