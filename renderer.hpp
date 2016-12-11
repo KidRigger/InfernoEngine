@@ -13,6 +13,8 @@
 
 namespace Renderer {
     
+    void render_init(void);
+    
     void render_scale(int screen_width, int screen_height);
     
     // 3 vertices and thickness -> 0 for filled.

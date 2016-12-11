@@ -11,11 +11,17 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_color.h>
 
-static ALLEGRO_COLOR color_white = al_map_rgb(255, 255, 255);
+static ALLEGRO_COLOR color_white;
 static const int origin_screen_x = 1440, origin_screen_y = 900;
-static float scale_factor_x = 1, scale_factor_y = 1;
+static float scale_factor_x, scale_factor_y;
 
 namespace Renderer {
+    
+    void render_init(void){
+        color_white = al_map_rgb(255, 255, 255);
+        scale_factor_x = 1;
+        scale_factor_y = 1;
+    }
     
     void render_scale(int screen_width, int screen_height){
         scale_factor_x = (screen_width/origin_screen_x);
