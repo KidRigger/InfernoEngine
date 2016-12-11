@@ -4,13 +4,13 @@
 //  InfernoEngine
 //
 //  Created by Ronak Harkhani on 12/10/16.
-//  Copyright © 2016 Anish Bhobe. All rights reserved.
+//  Copyright ï¿½ 2016 Anish Bhobe. All rights reserved.
 //
 //--------------------------------------------------------------------------------
 
 #include "asteroid.hpp"
-
-#include <time.h> 
+#include <stdlib.h>
+#include <ctime>
 
 const static Vector3 shape[3][10] = {
 	{Vector3(0.5,1.5), Vector3(1.5,1), Vector3(1,0.5), Vector3(2.5,0),

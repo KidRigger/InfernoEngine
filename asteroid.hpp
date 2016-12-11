@@ -4,7 +4,7 @@
 //  InfernoEngine
 //
 //  Created by Ronak Harkhani on 12/10/16.
-//  Copyright © 2016 Anish Bhobe. All rights reserved.
+//  Copyright ï¿½ 2016 Anish Bhobe. All rights reserved.
 //
 //--------------------------------------------------------------------------------
 
@@ -34,5 +34,5 @@ class Asteroid : public Projectile{
 
 };
 
-#endif // !
+#endif // asteroid_hpp
 

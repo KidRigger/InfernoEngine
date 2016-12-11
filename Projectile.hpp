@@ -11,11 +11,13 @@
 
 #include "vector3.hpp"
 #include "player.hpp"
+#include "object.hpp"
 
-class Projectile {
+class Projectile : public Object {
 public:
     virtual void Hit(void) = 0;
     virtual void Draw(void) = 0;
+    virtual void Update(void) = 0;
     
     virtual Vector3 GetPosition(void)=0;
     virtual float GetRadius(void)=0;

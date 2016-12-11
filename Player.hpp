@@ -16,15 +16,17 @@
 #define PLAYER_THICKNESS 1
 #include "vector3.hpp"
 #include "Projectile.hpp"
+#include "object.hpp"
 #include <vector>
 
-class Player {
+class Player : public Object {
 public:
     Player(float x, float y);
     void LookAt(const Vector3& target);
     void Shoot(void);
     void GetHit(void);
     void Draw(void);
+    void Update(void);
 private:
     Vector3 pos;
     float rotation;

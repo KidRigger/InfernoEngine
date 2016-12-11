@@ -44,4 +44,8 @@ void Player::Draw(void){
                             pos+relative_pts[2], 1);
 }
 
+void Player::Update(void){
+    //TODO: Update logic
+}
+
 //--------------------------------------------------------------------------------
