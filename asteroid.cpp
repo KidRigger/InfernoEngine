@@ -4,13 +4,13 @@
 //  InfernoEngine
 //
 //  Created by Ronak Harkhani on 12/10/16.
-//  Copyright © 2016 Anish Bhobe. All rights reserved.
+//  Copyright ï¿½ 2016 Anish Bhobe. All rights reserved.
 //
 //--------------------------------------------------------------------------------
 
 #include "asteroid.hpp"
-
-#include <time.h> 
+#include <stdlib.h>
+#include <ctime>
 
 Asteroid::Asteroid(const Vector3& pos_vec, float radius): pos_vec(pos_vec), radius(radius) {
 	srand((int)time(0));
