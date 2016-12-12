@@ -1,28 +1,33 @@
-﻿//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
 //
 //  asteroid.hpp
 //  InfernoEngine
 //
-//  Created by Ronak Harkhani on 12/10/16.
+//  Created by Ronak Harkhani on 12/12/16.
 //  Copyright � 2016 Anish Bhobe. All rights reserved.
 //
 //--------------------------------------------------------------------------------
 
 #include "ufo.hpp"
 
-Ufo::Ufo(Vector3 pos_vec, float radius):pos_vec(pos_vec), radius(radius) {
-	;
-}
+const static int thickness = 2;
+
+Ufo::Ufo(const Vector3& pos_vec, float radius):
+pos_vec(pos_vec), radius(radius) { }
 
 float Ufo::GetRadius() {
 	return radius;
 }
 
 void Ufo::Draw() {
-	for (int i = 0; i < 7; ++i) {
-		Renderer::draw_line(radius*shape[i], radius*shape[i + 1], 3);
+	for (int i = 0; i != 7; ++i) {
+		Renderer::draw_line(pos_vec+radius*shape[i], pos_vec+radius*shape[i + 1],
+                            thickness);
 	}
-	Renderer::draw_line(radius*shape[7], radius*shape[2], 3);
-	Renderer::draw_line(radius*shape[6], radius*shape[3], 3);
-
+    Renderer::draw_line(pos_vec+radius*shape[7], pos_vec+radius*shape[0],
+                        thickness);
+	Renderer::draw_line(pos_vec+radius*shape[7], pos_vec+radius*shape[2],
+                        thickness);
+	Renderer::draw_line(pos_vec+radius*shape[6], pos_vec+radius*shape[3],
+                        thickness);
 }
