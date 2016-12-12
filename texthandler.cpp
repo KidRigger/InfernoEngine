@@ -22,19 +22,33 @@ TextHandler::TextHandler(Vector3 pos_vec, int num):pos_vec(pos_vec),num(num) {
 	t.push_back( Text(pos_vec + Vector3(i*30,0), str[i]));
 }
 
+TextHandler::TextHandler(Vector3 pos_vec, std::string str) :
+	pos_vec(pos_vec), str(str) {
+
+	size = str.size();
+	for (int i = 0; i != size; ++i)
+		t.push_back(Text(pos_vec + Vector3(i * 30, 0), str[i]));
+
+}
+
+
+
+
+
 void TextHandler::SetNum(int num) {
 	size = str.size();
 
 	std::stringstream stringy;
 	stringy << num;
 	str = stringy.str();
-	if (int ds = (str.size()-size) > 0) {
+	int ds = str.size() - size;
+	if (ds > 0) {
 		for (int i = 0; i != ds; ++i) {
 			t.push_back(Text(pos_vec + Vector3((size + i) * 30, 0), 0));
 		}
 	}
-	else if (ds < 0) {
-		for (int i = 0; i != ds; ++i) {
+	else if (ds <= 0) {
+		for (int i = 0; i != -ds; ++i) {
 			t.pop_back();
 		}
 	}
@@ -42,11 +56,31 @@ void TextHandler::SetNum(int num) {
 	for (auto it1 = str.begin(); it1 != str.end() && it2 != t.end(); ++it1, ++it2) {
 		it2->SetChar(*it1);
 	}
+	size = str.size();
 }
 
 
+void TextHandler::SetString(std::string str) {
+	int ds = str.size() - size;
+	if (ds > 0) {
+		for (int i = 0; i != ds; ++i) {
+			t.push_back(Text(pos_vec + Vector3((size + i) * 30, 0), 0));
+		}
+	}
+	else if (ds <= 0) {
+		for (int i = 0; i != -ds; ++i) {
+			t.pop_back();
+		}
+	}
+	auto it2 = t.begin();
+	for (auto it1 = str.begin(); it1 != str.end() && it2 != t.end(); ++it1, ++it2) {
+		it2->SetChar(*it1);
+	}
+	size = str.size();
+}
+
 
 void TextHandler::Draw() {
-	for (int i = 0; i < size; ++i)
-		t[i].Draw();
+	for (auto it = t.begin(); it != t.end(); ++it)
+		it->Draw();
 }

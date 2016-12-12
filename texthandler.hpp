@@ -25,6 +25,8 @@ class TextHandler {
 
 public:
 	TextHandler(Vector3 pos_vec, int num);
+	TextHandler(Vector3 pos_vec, std::string str);
+	void SetString(std::string str);
 	void SetNum(int num);
 	void Draw();
 
