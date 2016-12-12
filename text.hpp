@@ -46,6 +46,7 @@ class Text {
     	Vector3 pos_vec;
     	char ch;
         float size;
+		void l(float i, float j, float p, float q);
     
     public:
     	Text(Vector3 pos_vec, char ch, float size = 20);
