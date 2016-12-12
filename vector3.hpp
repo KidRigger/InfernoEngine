@@ -11,6 +11,8 @@
 #ifndef vector3_hpp
 #define vector3_hpp
 
+#define PI 3.14145926535897932384626433
+
 #include <array>
 
 class Vector3 {

@@ -11,6 +11,7 @@
 #include "vector3.hpp"
 #include <cmath>
 
+
 // ---------- CTORS ---------- //
 
 Vector3::Vector3(void){
@@ -96,7 +97,7 @@ bool Vector3::operator ==(const Vector3& other) const {
 // ---------- Processed ---------- //
 
 float Vector3::SqrMagnitude(void) const {
-    return vec[0]*vec[0] + vec[1]*vec[1] * vec[2]*vec[2];
+    return vec[0]*vec[0] + vec[1]*vec[1] + vec[2]*vec[2];
 }
 
 float Vector3::Magnitude(void) const {
@@ -116,6 +117,15 @@ void Vector3::Normalize(void){
 }
 
 std::array<float, 3> Vector3::Angle(void) {
+    if(vec[2] == 0){
+        return std::array<float,3> {
+                                        (float)((vec[0]<0)?(PI):0)
+                                            +atanf(vec[1]/vec[0]),
+                                        (float)((vec[1]<0)?(PI):0)
+                                            +atanf(vec[0]/vec[1]),
+                                        (float)PI/2
+                                    };
+    }
     float mag = this->Magnitude();
     return std::array<float,3> {acosf(vec[0]/mag),
                                 acosf(vec[1]/mag),

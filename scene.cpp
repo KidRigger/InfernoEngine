@@ -9,8 +9,8 @@
 #include "scene.hpp"
 
 void Scene::Run(){
-    running = true;
     while (running) {
+        running = input_handler.Update();
         for(auto it = scene_objects.begin(); it != scene_objects.end(); ++it){
             (*it)->Update();
             (*it)->Draw();

@@ -15,6 +15,7 @@
 #include "vector3.hpp"
 #include <stdlib.h>
 #include <time.h>
+#include "object.hpp"
 
 const static Vector3 shape[8] = {
                                     Vector3(-0.375,-0.75), Vector3(0.375,-0.75),
@@ -23,7 +24,7 @@ const static Vector3 shape[8] = {
                                     Vector3(-1.5,0)      , Vector3(-0.75,-0.375)
                                 };
 
-class Ufo {
+class Ufo : public Object {
 public:
 	Ufo(const Vector3& pos_vec, float radius = 20);
     void Draw();

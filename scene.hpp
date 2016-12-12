@@ -12,13 +12,15 @@
 #include <vector>
 #include <memory>
 #include "object.hpp"
+#include "input.hpp"
 
 class Scene {
 public:
     Scene(float frame_rate);
-    void Run(void);
+    virtual void Run(void);
 private:
     bool running;
+    Input input_handler;
     float frame_rate;
     std::vector< std::unique_ptr<Object> > scene_objects;
 };
