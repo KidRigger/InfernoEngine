@@ -17,11 +17,11 @@ class Projectile : public Object {
 public:
     virtual void Hit(void) = 0;
     virtual void Draw(void) = 0;
-    virtual void Update(void) = 0;
+    virtual void Update(float dt) = 0;
     
-    virtual Vector3 GetPosition(void)=0;
-    virtual float GetRadius(void)=0;
-private:
+    virtual Vector3 GetPosition(void) const = 0;
+    virtual float GetRadius(void) const = 0;
+protected:
     virtual void Destroy(void) = 0;
 };
 

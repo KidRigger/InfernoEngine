@@ -27,9 +27,14 @@ const static Vector3 shape[8] = {
 class Ufo : public Object {
 public:
 	Ufo(const Vector3& pos_vec, float radius = 20);
+    
     void Draw();
-    Vector3 GetPosition();
-	float GetRadius();
+    void Hit();  //Not done
+    
+    Vector3 GetPosition() const;
+	float GetRadius() const;
+    void Update(float dt);
+    
 private:
     Vector3 pos_vec;
     float radius;

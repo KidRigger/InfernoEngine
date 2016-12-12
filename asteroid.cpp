@@ -49,10 +49,12 @@ void Asteroid::Draw() {
 	Renderer::draw_line(pos_vec + new_shape[0], pos_vec + new_shape[9], 3);
 }
 
-Vector3 Asteroid::GetPosition() {
+Vector3 Asteroid::GetPosition() const {
 	return pos_vec;
 }
 
-float Asteroid::GetRadius() {
+float Asteroid::GetRadius() const {
 	return 2*radius;
 }
+
+bool Asteroid::Update(float dt) {}

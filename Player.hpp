@@ -11,8 +11,8 @@
 #ifndef Player_hpp
 #define Player_hpp
 
-#define PLAYER_HEIGHT 10
-#define PLAYER_WIDTH 6
+#define PLAYER_HEIGHT 20
+#define PLAYER_WIDTH 12
 #define PLAYER_THICKNESS 1
 #include "vector3.hpp"
 #include "Projectile.hpp"
@@ -22,11 +22,22 @@
 class Player : public Object {
 public:
     Player(float x, float y);
+    
+    //Object inherited functions
+    void Hit(void);
+    void Draw(void);
+    void Update(float dt);
+    
+    //Getters
+    Vector3 GetPosition(void) const {return pos;}
+    float GetRadius(void) const {return 16;}
+    
+    //Player controlled
     void LookAt(const Vector3& target);
     void Shoot(void);
-    void GetHit(void);
-    void Draw(void);
-    void Update(void);
+    void Translate(const Vector3& delta_position);
+    void MoveForward(const float& ds);
+    
 private:
     Vector3 pos;
     float rotation;

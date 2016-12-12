@@ -21,8 +21,22 @@ relative_pts{
 }
 {}
 
+void Player::Hit(void){
+    //TODO: Get hit logic
+}
+
+void Player::Draw(void){
+    Renderer::draw_triangle(pos+relative_pts[0], pos+relative_pts[1],
+                            pos+relative_pts[2], 2);
+}
+
+void Player::Update(float dt){
+    
+}
+
+// ---------- Player controlled ---------- //
+
 void Player::LookAt(const Vector3& target) {
-    //TODO: Write the Look function
     float rot_by = ((target - pos).Angle()[0] - relative_pts[0].Angle()[0]);
     for(int i = 0; i != 3; ++i){
         relative_pts[i].RotateAroundZ(rot_by);
@@ -33,17 +47,12 @@ void Player::Shoot(void){
     //TODO: Shoot logic
 }
 
-void Player::GetHit(void){
-    //TODO: Get hit logic
+void Player::Translate(const Vector3 &delta_position){
+    pos = pos + delta_position;
 }
 
-void Player::Draw(void){
-    Renderer::draw_triangle(pos+relative_pts[0], pos+relative_pts[1],
-                            pos+relative_pts[2], 2);
-}
-
-void Player::Update(void){
-    //TODO: Update logic
+void Player::MoveForward(const float &ds){
+    pos = relative_pts[0].Normalized()*ds;
 }
 
 //--------------------------------------------------------------------------------

@@ -12,6 +12,7 @@
 #include <vector>
 #include <memory>
 #include "object.hpp"
+#include "Projectile.hpp"
 #include "input.hpp"
 
 class Scene {
@@ -22,7 +23,8 @@ private:
     bool running;
     Input input_handler;
     float frame_rate;
-    std::vector< std::unique_ptr<Object> > scene_objects;
+    std::vector<Object> scene_objects;
+    std::vector< Projectile > projectiles;
 };
 
 #endif /* scene_hpp */

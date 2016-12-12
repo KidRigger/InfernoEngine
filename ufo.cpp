@@ -11,15 +11,20 @@
 #include "ufo.hpp"
 
 const static int thickness = 2;
+
 Ufo::Ufo(const Vector3& pos_vec, float radius):
 pos_vec(pos_vec), radius(radius) {
 	srand((int)time(0));
 	if (radius == 0) {
-		this->radius = (rand() % 5 + 2)*15;
+		this->radius = (rand() % 2 + 1)*20;
 	}
 }
 
-float Ufo::GetRadius() {
+Vector3 Ufo::GetPosition(void) const {
+    return pos_vec;
+}
+
+float Ufo::GetRadius() const {
 	return radius;
 }
 
@@ -34,4 +39,8 @@ void Ufo::Draw() {
                         thickness);
 	Renderer::draw_line(pos_vec+radius*shape[6], pos_vec+radius*shape[3],
                         thickness);
+}
+
+void Ufo::Update(float dt){
+    
 }

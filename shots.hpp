@@ -18,10 +18,10 @@ public:
           float move_speed = 5, float radius = 2);
     void Hit(void);
     void Draw(void);
-    void Update(void);
+    void Update(float dt);
     
-    Vector3 GetPosition(void);
-    float GetRadius(void);
+    Vector3 GetPosition(void) const;
+    float GetRadius(void) const;
 private:
     virtual void Destroy(void);
     Vector3 pos, dir;
