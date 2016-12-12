@@ -11,9 +11,13 @@
 #include "ufo.hpp"
 
 const static int thickness = 2;
-
 Ufo::Ufo(const Vector3& pos_vec, float radius):
-pos_vec(pos_vec), radius(radius) { }
+pos_vec(pos_vec), radius(radius) {
+	srand((int)time(0));
+	if (radius == 0) {
+		this->radius = (rand() % 5 + 2)*15;
+	}
+}
 
 float Ufo::GetRadius() {
 	return radius;

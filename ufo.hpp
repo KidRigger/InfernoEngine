@@ -13,6 +13,8 @@
 
 #include "renderer.hpp"
 #include "vector3.hpp"
+#include <stdlib.h>
+#include <time.h>
 
 const static Vector3 shape[8] = {
                                     Vector3(-0.375,-0.75), Vector3(0.375,-0.75),
