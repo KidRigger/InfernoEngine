@@ -21,20 +21,24 @@ class Asteroid : public Projectile{
 public:
 
 	Asteroid(const Vector3& pos_vec, float radius = 0);
-	void Draw();
+    ~Asteroid(void) { }
+    void Draw();
 	Vector3 GetPosition(void) const ;
 	float GetRadius(void) const ;
+    bool IsVisible(void) const ;
     void Hit(void);
     void Update(float dt);
+    void Init(const Vector3& pos, const Vector3& vel);
 
 private:
     Vector3 pos_vec;
+    Vector3 vel;
     float radius;
     float angle;
     int shape_id;
+    bool is_visible;
     
     Vector3 new_shape[10];
-    void Destroy(void);
 };
 
 #endif // asteroid_hpp

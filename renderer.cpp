@@ -1,3 +1,4 @@
+//--------------------------------------------------------------------------------
 //
 //  renderer.cpp
 //  InfernoEngine
@@ -5,6 +6,7 @@
 //  Created by Anish Bhobe on 12/10/16.
 //  Copyright © 2016 Anish Bhobe. All rights reserved.
 //
+//--------------------------------------------------------------------------------
 
 #include "renderer.hpp"
 
@@ -17,6 +19,9 @@ static float scale_factor_x, scale_factor_y;
 
 namespace Renderer {
     
+// ---------- Init and settings ---------- //
+//--------------------------------------------------------------------------------
+    
     void render_init(void){
         color_white = al_map_rgb(255, 255, 255);
         scale_factor_x = 1;
@@ -27,6 +32,9 @@ namespace Renderer {
         scale_factor_x = (screen_width/origin_screen_x);
         scale_factor_y = (screen_height/origin_screen_y);
     }
+    
+// ----- Triangles ----- //
+//--------------------------------------------------------------------------------
     
     // 3 vertices and thickness -> 0 for filled.
     void draw_triangle(const Vector3& pt1, const Vector3& pt2,
@@ -49,11 +57,17 @@ namespace Renderer {
         }
     }
     
+// ----- Line ----- //
+//--------------------------------------------------------------------------------
+    
     void draw_line(const Vector3& pt1, const Vector3& pt2, float thickness){
         al_draw_line(pt1.GetX()*scale_factor_x, pt1.GetY()*scale_factor_y,
                      pt2.GetX()*scale_factor_x, pt2.GetY()*scale_factor_y,
                      color_white, thickness);
     }
+    
+// ----- Circle ----- //
+//--------------------------------------------------------------------------------
     
     //center, radius and thickness. Thickness 0 for filled.
     void draw_circle(const Vector3& center, float radius, float thickness){
@@ -64,11 +78,22 @@ namespace Renderer {
         }
     }
     
+// ----- Pixels ----- //
+//--------------------------------------------------------------------------------
+    
     void draw_point(const Vector3& position) {
         al_draw_pixel(position.GetX()*scale_factor_x,
                       position.GetY()*scale_factor_y,
                       color_white);
     }
-    
-}
 
+// ----- Screen ----- //
+//--------------------------------------------------------------------------------
+
+    float* get_screen_size(void) {
+        return new float[2] {origin_screen_x * scale_factor_x, origin_screen_y * scale_factor_y};
+    }
+
+//--------------------------------------------------------------------------------
+
+}

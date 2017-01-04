@@ -6,13 +6,12 @@
 //  Copyright © 2016 Anish Bhobe. All rights reserved.
 //
 
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_native_dialog.h>
+#include "Game.hpp"
+#include "renderer.hpp"
 
 int main(int argc, char ** argv) {
     
-    
+    /*
     //Initialization
     if(!al_init()){
         al_show_native_message_box(NULL, "ERROR", "ALLEGRO ERROR", "Allegro could not be initialized", NULL, ALLEGRO_MESSAGEBOX_ERROR);
@@ -25,6 +24,8 @@ int main(int argc, char ** argv) {
         al_show_native_message_box(NULL, "ERROR", "DISPLAY ERROR", "Display could not be initialized", NULL, ALLEGRO_MESSAGEBOX_ERROR);
         return -1;
     }
+    */
+    
     
     
     /* Test part
@@ -45,7 +46,15 @@ int main(int argc, char ** argv) {
     
     //Game loop goes here
     
-    al_destroy_display(dsp);
+    TheGame::Instance()->Init(640, 480, 60);
+    while(TheGame::Instance()->HandleEvents()){
+        TheGame::Instance()->Update();
+        TheGame::Instance()->Draw();
+        Renderer::draw_line(Vector3(30, 30), Vector3(50, 50));
+        al_rest(1.0/60);
+    }
+    
+    TheGame::Instance()->Clean();
     
     return 0;
 }

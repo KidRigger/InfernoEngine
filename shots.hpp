@@ -14,18 +14,19 @@
 
 class Shot : public Projectile {
 public:
-    Shot (const Vector3& position, const Vector3& direction,
-          float move_speed = 5, float radius = 2);
+    Shot (const Vector3& position, const Vector3& velocity, float radius = 2);
+    ~Shot(void) { Object::~Object(); }
     void Hit(void);
     void Draw(void);
     void Update(float dt);
     
     Vector3 GetPosition(void) const;
     float GetRadius(void) const;
+    bool IsVisible(void) const;
 private:
-    virtual void Destroy(void);
-    Vector3 pos, dir;
-    float speed, rad;
+    Vector3 pos, vel;
+    float rad;
+    bool is_visible;
 };
 
 

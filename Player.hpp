@@ -21,7 +21,8 @@
 
 class Player : public Object {
 public:
-    Player(float x, float y);
+    Player(float x, float y, float speed = 5);
+    ~Player(void) {}
     
     //Object inherited functions
     void Hit(void);
@@ -30,7 +31,7 @@ public:
     
     //Getters
     Vector3 GetPosition(void) const {return pos;}
-    float GetRadius(void) const {return 16;}
+    float GetRadius(void) const {return float(16.0);}
     
     //Player controlled
     void LookAt(const Vector3& target);
@@ -40,7 +41,7 @@ public:
     
 private:
     Vector3 pos;
-    float rotation;
+    float rotation, player_speed;
     Vector3 relative_pts[3];
 };
 

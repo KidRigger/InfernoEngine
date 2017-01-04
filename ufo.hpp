@@ -17,16 +17,10 @@
 #include <time.h>
 #include "object.hpp"
 
-const static Vector3 shape[8] = {
-                                    Vector3(-0.375,-0.75), Vector3(0.375,-0.75),
-                                    Vector3(0.75,-0.375) , Vector3(1.5,0),
-                                    Vector3(0.875,0.375) , Vector3(-0.875,0.375),
-                                    Vector3(-1.5,0)      , Vector3(-0.75,-0.375)
-                                };
-
 class Ufo : public Object {
 public:
-	Ufo(const Vector3& pos_vec, float radius = 20);
+	Ufo(const Vector3& pos_vec, const Vector3& velo, float radius = 20);
+    ~Ufo(void);
     
     void Draw();
     void Hit();  //Not done
@@ -36,7 +30,7 @@ public:
     void Update(float dt);
     
 private:
-    Vector3 pos_vec;
+    Vector3 pos_vec, vel;
     float radius;
 };
 

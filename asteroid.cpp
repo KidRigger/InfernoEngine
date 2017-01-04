@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <ctime>
 
+//--------------------------------------------------------------------------------
+
 const static Vector3 shape[3][10] = {
 	{   Vector3(0.5,1.5), Vector3(1.5,1), Vector3(1,0.5), Vector3(2.5,0),
 		Vector3(1.5,-1), Vector3(0.5,-1.5), Vector3(-1,-1), Vector3(-1,0),
@@ -23,6 +25,7 @@ const static Vector3 shape[3][10] = {
 		Vector3(1.5,-0.5), Vector3(1.5,-1.5), Vector3(0.5,-1), Vector3(0,-2),
 		Vector3(-1.5,0), Vector3(-1.5,1.5)} };
 
+//--------------------------------------------------------------------------------
 
 Asteroid::Asteroid(const Vector3& pos_vec, float radius): pos_vec(pos_vec), radius(radius) {
 	srand((int)time(0));
@@ -41,6 +44,8 @@ Asteroid::Asteroid(const Vector3& pos_vec, float radius): pos_vec(pos_vec), radi
 	}
 }
 
+//--------------------------------------------------------------------------------
+
 void Asteroid::Draw() {
 
 	for (int i = 0; i < 9; i++) {
@@ -48,6 +53,8 @@ void Asteroid::Draw() {
 	}
 	Renderer::draw_line(pos_vec + new_shape[0], pos_vec + new_shape[9], 3);
 }
+
+//--------------------------------------------------------------------------------
 
 Vector3 Asteroid::GetPosition() const {
 	return pos_vec;
@@ -57,4 +64,29 @@ float Asteroid::GetRadius() const {
 	return 2*radius;
 }
 
-bool Asteroid::Update(float dt) {}
+bool Asteroid::IsVisible() const {
+    return is_visible;
+}
+
+//--------------------------------------------------------------------------------
+
+void Asteroid::Update(float dt) {
+    pos_vec = pos_vec + (vel * dt);
+}
+
+//--------------------------------------------------------------------------------
+
+void Asteroid::Hit() {
+    pos_vec = Vector3(-300,-300);
+    vel = Vector3();
+    is_visible = false;
+}
+
+//--------------------------------------------------------------------------------
+
+void Asteroid::Init(const Vector3 &pos, const Vector3 &vel) {
+    pos_vec = pos;
+    this->vel = vel;
+}
+
+//--------------------------------------------------------------------------------

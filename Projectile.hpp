@@ -18,11 +18,12 @@ public:
     virtual void Hit(void) = 0;
     virtual void Draw(void) = 0;
     virtual void Update(float dt) = 0;
+    virtual void Init(const Vector3& pos, const Vector3& vel) = 0;
     
     virtual Vector3 GetPosition(void) const = 0;
     virtual float GetRadius(void) const = 0;
-protected:
-    virtual void Destroy(void) = 0;
+    virtual bool IsVisible(void) const = 0;
+    ~Projectile(void) {};
 };
 
 #endif /* Projectile_hpp */

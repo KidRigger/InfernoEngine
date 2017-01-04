@@ -8,14 +8,20 @@
 
 #include "player_controller.hpp"
 
-PlayerController::PlayerController(Player* player, Input* input,
+//--------------------------------------------------------------------------------
+
+PlayerController::PlayerController(Player* player,
                                    float player_speed):player_speed(player_speed) {
     this->player = player;
-    input_handler = input;
 }
 
+//--------------------------------------------------------------------------------
+
 void PlayerController::Act(void){
-    if(input_handler->GetInput(key_space)){
+    if(TheInput::Instance()->GetInput(key_space)){
         player->MoveForward(player_speed);
     }
+    player->LookAt(TheInput::Instance()->GetMousePosition());
 }
+
+//--------------------------------------------------------------------------------

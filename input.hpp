@@ -23,27 +23,37 @@ enum key_code {
     key_space,
     key_enter,
     key_rctrl,
-    key_lctrl
+    key_lctrl,
+    key_escape
 };
 
 class Input
 {
-private:
-    int x[2];
-    ALLEGRO_KEYBOARD_STATE keystate;
 public:
     
-    Input(void);
-    ~Input(void);
-    
+    static Input* Instance(void);
+    static void Clean(void);
     bool Update(void);
+    
+    void ResetMouse(ALLEGRO_DISPLAY *disp);
     
     //For output of the axes
     bool GetInput(key_code input);
     
     Vector3 GetMousePosition(void);
     
+private:
+    ALLEGRO_KEYBOARD_STATE keystate;
+    
+    Vector3 mouse_origin;
+    
+    static Input* currentInstance;
+    
+    Input(void);
+    ~Input(void) {}
 };
+
+typedef Input TheInput;
 
 #endif /* input_hpp */
 

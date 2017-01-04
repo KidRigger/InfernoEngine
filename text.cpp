@@ -13,14 +13,20 @@
 Text::Text(Vector3 pos_vec, char ch, float size):
 pos_vec(pos_vec), ch(ch), size(size) {}
 
+//--------------------------------------------------------------------------------
+
 void Text::SetChar(char ch) {
     this->ch = ch;
 }
+
+//--------------------------------------------------------------------------------
 
 void Text::l(float i, float j, float p, float q) {
 	Renderer::draw_line(pos_vec + Vector3(i,j) * size * 0.5,
 						pos_vec + Vector3(p,q) * size * 0.5, thick);
 }
+
+//--------------------------------------------------------------------------------
 
 void Text::Draw() {
     if(ch >= '0' && ch <= '9') {
@@ -210,11 +216,8 @@ void Text::Draw() {
 			l(2, 4, 0, 4);
 			break;
 
-		}	
-
-
+		}
 	}
-
 }
 
 //--------------------------------------------------------------------------------

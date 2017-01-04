@@ -22,6 +22,8 @@ TextHandler::TextHandler(Vector3 pos_vec, int num):pos_vec(pos_vec),num(num) {
 	t.push_back( Text(pos_vec + Vector3(i*30,0), str[i]));
 }
 
+//--------------------------------------------------------------------------------
+
 TextHandler::TextHandler(Vector3 pos_vec, std::string str) :
 	pos_vec(pos_vec), str(str) {
 
@@ -31,9 +33,7 @@ TextHandler::TextHandler(Vector3 pos_vec, std::string str) :
 
 }
 
-
-
-
+//--------------------------------------------------------------------------------
 
 void TextHandler::SetNum(int num) {
 	size = (int)str.size();
@@ -59,6 +59,7 @@ void TextHandler::SetNum(int num) {
 	size = (int)str.size();
 }
 
+//--------------------------------------------------------------------------------
 
 void TextHandler::SetString(std::string str) {
 	int ds = (int)str.size() - size;
@@ -79,6 +80,7 @@ void TextHandler::SetString(std::string str) {
 	size = (int)str.size();
 }
 
+//--------------------------------------------------------------------------------
 
 void TextHandler::Draw() {
 	for (auto it = t.begin(); it != t.end(); ++it)

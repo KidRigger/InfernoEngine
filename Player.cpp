@@ -10,16 +10,22 @@
 
 #include "Player.hpp"
 #include "renderer.hpp"
+#include "input.hpp"
 
-Player::Player(float x, float y) :
+//--------------------------------------------------------------------------------
+
+Player::Player(float x, float y, float speed) :
 pos(x,y),
 rotation(90),
 relative_pts{
     Vector3(0,-(float)40/3),
     Vector3(6,(float)20/3),
     Vector3(-6,(float)20/3)
-}
+},
+player_speed(speed)
 {}
+
+//--------------------------------------------------------------------------------
 
 void Player::Hit(void){
     //TODO: Get hit logic
@@ -31,10 +37,14 @@ void Player::Draw(void){
 }
 
 void Player::Update(float dt){
-    
+    if(TheInput::Instance()->GetInput(key_space)){
+        this->MoveForward(player_speed);
+    }
+    this->LookAt(TheInput::Instance()->GetMousePosition());
 }
 
 // ---------- Player controlled ---------- //
+//--------------------------------------------------------------------------------
 
 void Player::LookAt(const Vector3& target) {
     float rot_by = ((target - pos).Angle()[0] - relative_pts[0].Angle()[0]);

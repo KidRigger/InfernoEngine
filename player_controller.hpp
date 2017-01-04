@@ -14,12 +14,11 @@
 
 class PlayerController {
 public:
-    PlayerController(Player* player, Input* input, float player_speed = 5);
+    PlayerController(Player* player, float player_speed = 5);
     void Act(void);
 private:
     float player_speed;
     Player *player;
-    Input *input_handler;
 };
 
 #endif /* player_controller_hpp */

@@ -14,7 +14,6 @@
 #include "object.hpp"
 
 namespace Collider {
-    bool CollisionCheck(const Object& object,
-                        std::vector<Projectile>& projectiles);
+    bool CollisionCheck(std::vector<Object*> &obj);
 };
 #endif /* collision_manager_hpp */
