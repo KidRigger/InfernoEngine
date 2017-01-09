@@ -11,17 +11,18 @@
 #ifndef Player_hpp
 #define Player_hpp
 
-#define PLAYER_HEIGHT 20
-#define PLAYER_WIDTH 12
-#define PLAYER_THICKNESS 1
 #include "vector3.hpp"
 #include "Projectile.hpp"
 #include "object.hpp"
 #include <vector>
 
+const static float PLAYER_HEIGHT = 20;
+const static float PLAYER_WIDTH = 12;
+const static float PLAYER_THICKNESS = 1;
+
 class Player : public Object {
 public:
-    Player(float x, float y, float speed = 5);
+    Player(float x, float y, int id = 0, float speed = 150);
     ~Player(void) {}
     
     //Object inherited functions
@@ -32,17 +33,27 @@ public:
     //Getters
     Vector3 GetPosition(void) const {return pos;}
     float GetRadius(void) const {return float(16.0);}
+    int GetID(void) const {return this->id;}
     
     //Player controlled
     void LookAt(const Vector3& target);
     void Shoot(void);
     void Translate(const Vector3& delta_position);
-    void MoveForward(const float& ds);
+    
+    void AddForce(const Vector3& thrust);
+    
+    void ChangeID(int id) {this->id = id;}
+    
+    int getTypeInt(void) { return 1; }
     
 private:
-    Vector3 pos;
+    int id;
+    Vector3 pos, vel, acc;
     float rotation, player_speed;
     Vector3 relative_pts[3];
+    int shot_count;
+    float player_thrust;
+    bool flame;
 };
 
 #endif /* Player_hpp */

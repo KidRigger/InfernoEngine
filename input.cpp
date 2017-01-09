@@ -34,7 +34,7 @@ Input::Input(void){
 void Input::ResetMouse(ALLEGRO_DISPLAY *disp){
     int x,y;
     al_get_window_position(disp, &x, &y);
-    mouse_origin.SetPosition(x, y, 0);
+    mouse_origin.SetValue(x, y, 0);
 }
 
 //--------------------------------------------------------------------------------

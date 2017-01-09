@@ -11,36 +11,68 @@
 #include "Player.hpp"
 #include "renderer.hpp"
 #include "input.hpp"
+#include "Game.hpp"
+#include "score_manager.hpp"
 
 //--------------------------------------------------------------------------------
 
-Player::Player(float x, float y, float speed) :
+Player::Player(float x, float y, int id, float speed) :
 pos(x,y),
 rotation(90),
+id(id),
 relative_pts{
-    Vector3(0,-(float)40/3),
-    Vector3(6,(float)20/3),
-    Vector3(-6,(float)20/3)
+    Vector3(0,-(float)(2*PLAYER_HEIGHT)/3),
+    Vector3(PLAYER_WIDTH/2,(float)PLAYER_HEIGHT/3),
+    Vector3(-PLAYER_WIDTH/2,(float)PLAYER_HEIGHT/3)
 },
-player_speed(speed)
-{}
+player_speed(speed),
+shot_count(0),
+player_thrust(250),
+flame(false)
+{
+    printf("Player ID: %i\n",id);
+}
 
 //--------------------------------------------------------------------------------
 
 void Player::Hit(void){
-    //TODO: Get hit logic
+    TheScoreManager::Instance()->DecrementLife();
 }
 
 void Player::Draw(void){
     Renderer::draw_triangle(pos+relative_pts[0], pos+relative_pts[1],
-                            pos+relative_pts[2], 2);
+                            pos+relative_pts[2], PLAYER_THICKNESS);
+    //printf("Shoot draw\n");
+    if(flame){
+        Renderer::draw_triangle(pos-relative_pts[0], pos+relative_pts[1]*0.5, pos+relative_pts[2]*0.5);
+    }
 }
 
 void Player::Update(float dt){
+    shot_count++;
     if(TheInput::Instance()->GetInput(key_space)){
-        this->MoveForward(player_speed);
+        flame = true;
+        if(vel.SqrMagnitude() < player_speed*player_speed)
+            this->AddForce(player_thrust * relative_pts[0].Normalized());
     }
+    else{
+        flame=false;
+    }
+    
+    vel = vel + acc * dt/2;
+    pos = pos + vel * dt;
+    vel = vel + acc * dt/2;
+    
+    if (vel.SqrMagnitude() > 0){
+        vel = vel - player_thrust*vel.Normalized()*dt/3;
+    }
+    
     this->LookAt(TheInput::Instance()->GetMousePosition());
+    if(TheInput::Instance()->GetInput(key_lctrl)){
+        this->Shoot();
+        //printf("shoot\n");
+    }
+    acc.SetValue(0, 0, 0);
 }
 
 // ---------- Player controlled ---------- //
@@ -54,15 +86,16 @@ void Player::LookAt(const Vector3& target) {
 }
 
 void Player::Shoot(void){
-    //TODO: Shoot logic
+    if(shot_count < 15)
+        return;
+    TheGame::Instance()->SpawnShot(pos + relative_pts[0]*2, relative_pts[0].Normalized()*250);
+    shot_count = 0;
 }
 
-void Player::Translate(const Vector3 &delta_position){
-    pos = pos + delta_position;
-}
-
-void Player::MoveForward(const float &ds){
-    pos = relative_pts[0].Normalized()*ds;
+void Player::AddForce(const Vector3 &thrust){
+    acc = acc + thrust;
 }
 
 //--------------------------------------------------------------------------------
+
+

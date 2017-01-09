@@ -23,7 +23,8 @@ void Text::SetChar(char ch) {
 
 void Text::l(float i, float j, float p, float q) {
 	Renderer::draw_line(pos_vec + Vector3(i,j) * size * 0.5,
-						pos_vec + Vector3(p,q) * size * 0.5, thick);
+                        pos_vec + Vector3(p,q) * size * 0.5,
+                        (size >=   20)?thick:1);
 }
 
 //--------------------------------------------------------------------------------
@@ -33,7 +34,8 @@ void Text::Draw() {
         for (int i = 0; i < 7; ++i) {
             if (numbers[ch-'0'][i] == true) {
                 Renderer::draw_line(pos_vec + line[i][0]*size,
-                                    pos_vec + line[i][1]*size, thick);
+                                    pos_vec + line[i][1]*size,
+                                    (size >= 20)?thick:1);
             }
         }
     }

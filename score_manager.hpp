@@ -9,6 +9,40 @@
 #ifndef score_manager_hpp
 #define score_manager_hpp
 
-#include <stdio.h>
+#include <map>
+#include "texthandler.hpp"
+
+class ScoreManager {
+public:
+    static ScoreManager* Instance(void);
+    
+    void Init(const Vector3& score,
+              const Vector3& high_score,
+              const Vector3& life);
+    
+    void SetScore(int score);
+    
+    void IncrementScore(int award);
+    
+    void DecrementLife(void);
+    
+    void Update(void);
+    
+    void Draw(void);
+    
+    void Clean(void);
+    
+private:
+    ScoreManager();
+    ~ScoreManager() {texts.}
+    
+    std::map<std::string, TextHandler*> texts;
+    
+    int score, max_score, lives;
+    
+    static ScoreManager* thisInstance;
+};
+
+typedef ScoreManager TheScoreManager;
 
 #endif /* score_manager_hpp */

@@ -1,4 +1,4 @@
-//
+   //
 //  collision_manager.cpp
 //  InfernoEngine
 //
@@ -8,6 +8,7 @@
 
 #include "collision_manager.hpp"
 #include "vector3.hpp"
+#include "Game.hpp"
 
 namespace Collider {
     bool CollisionCheck(std::vector<Object*> &obj){
@@ -15,14 +16,42 @@ namespace Collider {
             float ro = (*iter)->GetRadius();
             Vector3 pos_o = (*iter)->GetPosition();
             for(auto it = iter+1; it != obj.end(); ++it){
-                float r = ro+(*it)->GetRadius();
-                if(r*r < (pos_o - (*it)->GetPosition()).SqrMagnitude()){
-                    (*it)->Hit();
-                    (*iter)->Hit();
-                    return true;
+                if( (*iter)->getTypeInt() != (*it)->getTypeInt()) {
+                    float r = ro+(*it)->GetRadius();
+                    if(r*r > (pos_o - (*it)->GetPosition()).SqrMagnitude()){
+                        int a = (*iter)->GetID();
+                        int b = (*it)->GetID();
+                        TheGame::Instance()->CallHit(a);
+                        TheGame::Instance()->CallHit(b);
+                        return true;
+                    }
                 }
             }
         }
         return false;
+    }
+    
+    bool OnScreen(Object* obj) {
+        const float r = obj->GetRadius();
+        const float x = obj->GetPosition().GetX();
+        const float y = obj->GetPosition().GetY();
+        auto thisGame = TheGame::Instance();
+        return !(x - r > thisGame->GetScreenWidth() ||
+                 x + r < 0 ||
+                 y - r > thisGame->GetScreenHeight()||
+                 y + r < 0);
+        
+    }
+    
+    bool OnScreen(Object& obj) {
+        const float r = obj.GetRadius();
+        const float x = obj.GetPosition().GetX();
+        const float y = obj.GetPosition().GetY();
+        auto thisGame = TheGame::Instance();
+        return !(x - r > thisGame->GetScreenWidth() ||
+                 x + r < 0 ||
+                 y - r > thisGame->GetScreenHeight()||
+                 y + r < 0);
+        
     }
 }

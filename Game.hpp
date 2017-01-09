@@ -13,8 +13,6 @@
 #include "object.hpp"
 #include "allegro5/allegro.h"
 #include "allegro5/allegro_native_dialog.h"
-#include "input.hpp"
-
 
 class Game {
 public:
@@ -24,8 +22,25 @@ public:
     void Update(void);
     bool HandleEvents(void);
     void Draw(void);
-    void Clean(void) { delete thisInstance; }
+    void Clean(void);
+    void Destroy(int id);
     
+    int GetScreenWidth(void) {return screenWidth;}
+    int GetScreenHeight(void) {return screenHeight;}
+    
+    void CallHit(int id) {
+        if(id < gameObjects.size())
+            gameObjects[id]->Hit();
+        printf("Hit called on %i\n",id);  
+    }
+    
+    void GameOver(void) { game_on = false;};
+    
+    void SpawnAsteroid(const Vector3& position,
+                       Vector3 direction = Vector3(),
+                       float r = 0, int lvl = 0);
+    void SpawnShot(const Vector3& position,
+                   Vector3 velocity);
 private:
     
     Game(void) {
@@ -42,8 +57,15 @@ private:
     int screenWidth, screenHeight;
     float frameRate;
     
+    bool game_on;
+    
+    int update_counter;
+    
     std::vector<Object*> gameObjects;
     ALLEGRO_DISPLAY *disp;
+    
+    std::vector<Object*> spawn_queue;
+    std::vector<int> del_ids;
     
 };
 

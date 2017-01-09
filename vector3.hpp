@@ -14,6 +14,7 @@
 #define PI 3.14145926535897932384626433
 
 #include <array>
+#include <iostream>
 
 class Vector3 {
 public:
@@ -28,12 +29,13 @@ public:
     float GetX(void) const;
     float GetY(void) const;
     float GetZ(void) const;
-    void SetPosition(float x, float y, float z);
+    void SetValue(float x, float y, float z);
     
     //operators
     Vector3 operator +(const Vector3 &other) const;
     Vector3 operator -(const Vector3 &other) const;
     Vector3 operator *(const float &scalar) const;
+    friend std::ostream& operator <<(std::ostream& output, const Vector3& self);
     friend Vector3 operator *(const float &scalar, const Vector3& vector);
     Vector3 operator /(const float &scalar) const;
     bool operator ==(const Vector3& other) const;
@@ -51,8 +53,13 @@ public:
     void RotateAroundZ(const float& angle);
     
     //products
-    friend float Dot(const Vector3& A, const Vector3& B);
-    friend Vector3 Cross(const Vector3& A, const Vector3& B);
+    static float Dot(const Vector3& A, const Vector3& B);
+    static Vector3 Cross(const Vector3& A, const Vector3& B);
+    
+    static Vector3 RandomDirection(void);
+    static Vector3 RandomInRange(float max, float min = 0);
+    
+    static Vector3 Lerp(const Vector3& A, const Vector3& B, float factor);
     
 private:
     float vec [3];

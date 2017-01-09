@@ -10,23 +10,31 @@
 #define shots_hpp
 
 #include "vector3.hpp"
-#include "Projectile.hpp"
+#include "object.hpp"
 
-class Shot : public Projectile {
+class Shot : public Object {
 public:
-    Shot (const Vector3& position, const Vector3& velocity, float radius = 2);
+    Shot (const Vector3& position, const Vector3& velocity,
+          int id, float radius = 1);
     ~Shot(void) { Object::~Object(); }
     void Hit(void);
     void Draw(void);
     void Update(float dt);
+    void ChangeID(int id);
     
     Vector3 GetPosition(void) const;
     float GetRadius(void) const;
     bool IsVisible(void) const;
+    int GetID(void) const;
+    
+    int getTypeInt(void) { return 4; }
+    
 private:
+    void Destroy(void);
+    //bool reg_hit;
     Vector3 pos, vel;
     float rad;
-    bool is_visible;
+    int id;
 };
 
 

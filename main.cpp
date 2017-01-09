@@ -46,7 +46,7 @@ int main(int argc, char ** argv) {
     
     //Game loop goes here
     
-    TheGame::Instance()->Init(640, 480, 60);
+    TheGame::Instance()->Init(1440, 900, 60);
     while(TheGame::Instance()->HandleEvents()){
         TheGame::Instance()->Update();
         TheGame::Instance()->Draw();

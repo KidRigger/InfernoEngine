@@ -16,7 +16,9 @@
 //--------------------------------------------------------------------------------
 
 Vector3::Vector3(void){
-    ;
+    vec[0] = 0;
+    vec[1] = 0;
+    vec[2] = 0;
 }
 
 //--------------------------------------------------------------------------------
@@ -60,7 +62,7 @@ float Vector3::GetZ(void) const {
 
 //--------------------------------------------------------------------------------
 
-void Vector3::SetPosition(float x, float y, float z){
+void Vector3::SetValue(float x, float y, float z){
     vec[0] = x;
     vec[1] = y;
     vec[2] = z;
@@ -107,6 +109,13 @@ bool Vector3::operator ==(const Vector3& other) const {
     return (this->vec[0] == other.GetX()
             && this->vec[1] == other.GetY()
             && this->vec[2] == other.GetZ());
+}
+
+std::ostream &operator<<(std::ostream &output,
+                           const Vector3 &self ) {
+    output << self.vec[0] << " i+ " << self.vec[1];
+    output << " j+ " << self.vec[2] << " k";
+    return output;
 }
 
 // ---------- Processed ---------- //
@@ -176,7 +185,7 @@ void Vector3::RotateAroundZ(const float &angle){
 // ---------- Products ---------- //
 //--------------------------------------------------------------------------------
 
-float Dot(const Vector3& A, const Vector3& B){
+float Vector3::Dot(const Vector3& A, const Vector3& B){
     float product = 0;
     for(int i = 0; i != 3; ++i){
         product += A.vec[i]*B.vec[i];
@@ -184,10 +193,27 @@ float Dot(const Vector3& A, const Vector3& B){
     return product;
 }
 
-Vector3 Cross(const Vector3& A, const Vector3& B){
+Vector3 Vector3::Cross(const Vector3& A, const Vector3& B){
     return Vector3(A.vec[1]*B.vec[2] - B.vec[1]*A.vec[2],
                    A.vec[2]*B.vec[0] - B.vec[2]*A.vec[0],
                    A.vec[0]*B.vec[1] - B.vec[0]*A.vec[1]);
+}
+
+//--------------------------------------------------------------------------------
+
+Vector3 Vector3::RandomDirection() {
+    srand((unsigned int)time(0)*rand());
+    return Vector3(rand()-32768,rand()-32768).Normalized();
+}
+
+Vector3 Vector3::RandomInRange(float max, float min) {
+    srand((int)time(0)*rand());
+    return (rand()%(int)(max-min) + min)
+            *Vector3((rand()-rand()),rand()-rand()).Normalized();
+}
+
+Vector3 Vector3::Lerp(const Vector3 &A, const Vector3 &B, float factor){
+    return (factor*B + (1-factor)*A);
 }
 
 //--------------------------------------------------------------------------------

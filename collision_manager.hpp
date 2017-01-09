@@ -15,5 +15,7 @@
 
 namespace Collider {
     bool CollisionCheck(std::vector<Object*> &obj);
+    bool OnScreen(Object* obj);
+    bool OnScreen(Object& obj);
 };
 #endif /* collision_manager_hpp */

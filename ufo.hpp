@@ -26,11 +26,14 @@ public:
     void Hit();  //Not done
     
     Vector3 GetPosition() const;
-	float GetRadius() const;
+    float GetRadius() const;
+    int GetID(void) const {return id;}
     void Update(float dt);
+    int getTypeInt(void) { return 2; }
     
 private:
     Vector3 pos_vec, vel;
+    int id;
     float radius;
 };
 

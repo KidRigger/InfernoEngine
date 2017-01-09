@@ -23,6 +23,7 @@ namespace Renderer {
 //--------------------------------------------------------------------------------
     
     void render_init(void){
+        al_init_primitives_addon();
         color_white = al_map_rgb(255, 255, 255);
         scale_factor_x = 1;
         scale_factor_y = 1;
@@ -64,6 +65,7 @@ namespace Renderer {
         al_draw_line(pt1.GetX()*scale_factor_x, pt1.GetY()*scale_factor_y,
                      pt2.GetX()*scale_factor_x, pt2.GetY()*scale_factor_y,
                      color_white, thickness);
+        //printf("Line draw\n");
     }
     
 // ----- Circle ----- //
@@ -72,9 +74,14 @@ namespace Renderer {
     //center, radius and thickness. Thickness 0 for filled.
     void draw_circle(const Vector3& center, float radius, float thickness){
         if(thickness > 0) {
-            al_draw_filled_circle(center.GetX()*scale_factor_x,
+            al_draw_circle(center.GetX()*scale_factor_x,
                                   center.GetY()*scale_factor_y,
-                                  radius, color_white);
+                                  radius, color_white, thickness);
+        }
+        else {
+            al_draw_filled_circle(center.GetX()*scale_factor_x,
+                           center.GetY()*scale_factor_y,
+                           radius, color_white);
         }
     }
     
