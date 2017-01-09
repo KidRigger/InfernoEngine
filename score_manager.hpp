@@ -32,9 +32,12 @@ public:
     
     void Clean(void);
     
+    int GetScore(void) { return score; }
+    int GetHighScore(void) { return max_score; }
+    
 private:
     ScoreManager();
-    ~ScoreManager() {texts.}
+    ~ScoreManager() {texts.clear();}
     
     std::map<std::string, TextHandler*> texts;
     

@@ -19,7 +19,7 @@ TextHandler::TextHandler(Vector3 pos_vec, int num, int size):pos_vec(pos_vec),nu
 	size = (int)str.size();
 
 	for (int i = 0; i != size; ++i ) 
-	t.push_back( Text(pos_vec + Vector3(i * dim_size * 1.33, 0), str[i]));
+	t.push_back( Text(pos_vec + Vector3(i * dim_size * 1.33, 0), str[i], dim_size));
 }
 
 //--------------------------------------------------------------------------------

@@ -28,7 +28,8 @@ relative_pts{
 player_speed(speed),
 shot_count(0),
 player_thrust(250),
-flame(false)
+flame(false),
+invincibility_counter(0)
 {
     printf("Player ID: %i\n",id);
 }
@@ -36,7 +37,13 @@ flame(false)
 //--------------------------------------------------------------------------------
 
 void Player::Hit(void){
-    TheScoreManager::Instance()->DecrementLife();
+    if(invincibility_counter <= 0){
+        TheScoreManager::Instance()->DecrementLife();
+        pos.SetValue(TheGame::Instance()->GetScreenWidth()/2,
+                     TheGame::Instance()->GetScreenHeight()/2,
+                     0);
+        invincibility_counter = 10;
+    }
 }
 
 void Player::Draw(void){
@@ -50,6 +57,9 @@ void Player::Draw(void){
 
 void Player::Update(float dt){
     shot_count++;
+    if(invincibility_counter > 0){
+        invincibility_counter-=dt;
+    }
     if(TheInput::Instance()->GetInput(key_space)){
         flame = true;
         if(vel.SqrMagnitude() < player_speed*player_speed)

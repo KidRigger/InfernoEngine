@@ -7,7 +7,10 @@
 //
 
 #include "Game.hpp"
+#include "gameover.hpp"
+#include "input.hpp"
 #include "renderer.hpp"
+#include "score_manager.hpp"
 
 int main(int argc, char ** argv) {
     
@@ -55,6 +58,8 @@ int main(int argc, char ** argv) {
     }
     
     TheGame::Instance()->Clean();
+    
+    
     
     return 0;
 }

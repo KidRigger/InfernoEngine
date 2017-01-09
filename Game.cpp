@@ -11,6 +11,7 @@
 #include <algorithm>
 #include "Player.hpp"
 #include "renderer.hpp"
+#include "gameover.hpp"
 #include "asteroid.hpp"
 #include "input.hpp"
 #include "score_manager.hpp"
@@ -92,18 +93,32 @@ bool Game::HandleEvents() {
 }
 
 void Game::Draw() {
-    al_clear_to_color(al_map_rgb(0, 0, 0));
+    if(game_on){
+        al_clear_to_color(al_map_rgb(0, 0, 0));
     
-    for(auto it = gameObjects.begin(); it != gameObjects.end(); ++it){
-        (*it)->Draw();
+        for(auto it = gameObjects.begin(); it != gameObjects.end(); ++it){
+            (*it)->Draw();
+        }
+        TheScoreManager::Instance()->Draw();
+    
+        al_flip_display();
     }
-    TheScoreManager::Instance()->Draw();
-    
-    al_flip_display();
 }
 
 void Game::Destroy(int id) {
     del_ids.push_back(id);
+}
+
+void Game::GameOver() {
+    game_on = false;
+    GameOverScreen gameOver(1440, 900,
+                            TheScoreManager::Instance()->GetScore(),
+                            TheScoreManager::Instance()->GetHighScore()
+                            );
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    gameOver.Draw();
+    al_flip_display();
+    while(TheInput::Instance()->Update());
 }
 
 void Game::SpawnAsteroid(const Vector3& position,

@@ -13,7 +13,8 @@
 
 class GameOverScreen {
 public:
-    GameOverScreen(int screenWidth, int screenHeight);
+    GameOverScreen(int screenWidth, int screenHeight,
+                   int score, int high_score);
     ~GameOverScreen();
     void Draw();
 private:

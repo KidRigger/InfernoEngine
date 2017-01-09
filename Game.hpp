@@ -34,7 +34,7 @@ public:
         printf("Hit called on %i\n",id);  
     }
     
-    void GameOver(void) { game_on = false;};
+    void GameOver(void);
     
     void SpawnAsteroid(const Vector3& position,
                        Vector3 direction = Vector3(),

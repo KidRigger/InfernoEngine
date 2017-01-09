@@ -50,6 +50,7 @@ private:
     int id;
     Vector3 pos, vel, acc;
     float rotation, player_speed;
+    float invincibility_counter;
     Vector3 relative_pts[3];
     int shot_count;
     float player_thrust;
