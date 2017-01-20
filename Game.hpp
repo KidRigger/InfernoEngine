@@ -18,12 +18,15 @@ class Game {
 public:
     
     static Game* Instance(void);
+    
     void Init(int _screen_height, int _screen_width, float _frame_rate);
+    
+    void Start(void);
     void Update(void);
     bool HandleEvents(void);
     void Draw(void);
-    void Clean(void);
-    void Destroy(int id);
+    void Clean (void);
+    
     
     int GetScreenWidth(void) {return screenWidth;}
     int GetScreenHeight(void) {return screenHeight;}
@@ -41,6 +44,8 @@ public:
                        float r = 0, int lvl = 0);
     void SpawnShot(const Vector3& position,
                    Vector3 velocity);
+    void Destroy(int id);
+    
 private:
     
     Game(void) {
@@ -57,7 +62,7 @@ private:
     int screenWidth, screenHeight;
     float frameRate;
     
-    bool game_on;
+    bool game_on, full_screen;
     
     int update_counter;
     

@@ -29,7 +29,7 @@ player_speed(speed),
 shot_count(0),
 player_thrust(250),
 flame(false),
-invincibility_counter(0)
+invincibility_counter(3)
 {
     printf("Player ID: %i\n",id);
 }
@@ -42,7 +42,8 @@ void Player::Hit(void){
         pos.SetValue(TheGame::Instance()->GetScreenWidth()/2,
                      TheGame::Instance()->GetScreenHeight()/2,
                      0);
-        invincibility_counter = 10;
+        vel.SetValue(0, 0, 0);
+        invincibility_counter = 3;
     }
 }
 
@@ -60,7 +61,7 @@ void Player::Update(float dt){
     if(invincibility_counter > 0){
         invincibility_counter-=dt;
     }
-    if(TheInput::Instance()->GetInput(key_space)){
+    if(TheInput::Instance()->GetInput(key_space | key_rmb)){
         flame = true;
         if(vel.SqrMagnitude() < player_speed*player_speed)
             this->AddForce(player_thrust * relative_pts[0].Normalized());
@@ -73,12 +74,26 @@ void Player::Update(float dt){
     pos = pos + vel * dt;
     vel = vel + acc * dt/2;
     
+    if(pos.GetX() > TheGame::Instance()->GetScreenWidth()) {
+        pos.SetValue(0, pos.GetY(), pos.GetZ());
+    }
+    if(pos.GetY() > TheGame::Instance()->GetScreenHeight()) {
+        pos.SetValue(pos.GetX(), 0, pos.GetZ());
+    }
+    if(pos.GetX() < 0) {
+        pos.SetValue(TheGame::Instance()->GetScreenWidth(),
+                     pos.GetY(), pos.GetZ());
+    }
+    if (pos.GetY() < 0) {
+        pos.SetValue(pos.GetX(), TheGame::Instance()->GetScreenHeight(), 0);
+    }
+    
     if (vel.SqrMagnitude() > 0){
         vel = vel - player_thrust*vel.Normalized()*dt/3;
     }
     
     this->LookAt(TheInput::Instance()->GetMousePosition());
-    if(TheInput::Instance()->GetInput(key_lctrl)){
+    if(TheInput::Instance()->GetInput(key_lctrl | key_lmb)){
         this->Shoot();
         //printf("shoot\n");
     }
@@ -98,7 +113,7 @@ void Player::LookAt(const Vector3& target) {
 void Player::Shoot(void){
     if(shot_count < 15)
         return;
-    TheGame::Instance()->SpawnShot(pos + relative_pts[0]*2, relative_pts[0].Normalized()*250);
+    TheGame::Instance()->SpawnShot(pos + relative_pts[0]*2, relative_pts[0].Normalized()*300);
     shot_count = 0;
 }
 

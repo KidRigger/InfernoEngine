@@ -42,6 +42,7 @@ void Input::ResetMouse(ALLEGRO_DISPLAY *disp){
 bool Input::Update(void){
     
     al_get_keyboard_state(&keystate);
+    al_get_mouse_state(&mousestate);
     
     if (al_key_down(&keystate, ALLEGRO_KEY_ESCAPE))
     {
@@ -53,38 +54,31 @@ bool Input::Update(void){
 
 //--------------------------------------------------------------------------------
 
-bool Input::GetInput(key_code input){
-    switch(input){
-        case key_w:
-            return al_key_down(&keystate, ALLEGRO_KEY_W);
-            break;
-        case key_a:
-            return al_key_down(&keystate, ALLEGRO_KEY_A);
-            break;
-        case key_s:
-            return al_key_down(&keystate, ALLEGRO_KEY_S);
-            break;
-        case key_d:
-            return al_key_down(&keystate, ALLEGRO_KEY_D);
-            break;
-        case key_space:
-            return al_key_down(&keystate, ALLEGRO_KEY_SPACE);
-            break;
-        case key_enter:
-            return al_key_down(&keystate, ALLEGRO_KEY_ENTER);
-            break;
-        case key_rctrl:
-            return al_key_down(&keystate, ALLEGRO_KEY_RCTRL);
-            break;
-        case key_lctrl:
-            return al_key_down(&keystate, ALLEGRO_KEY_LCTRL);
-            break;
-        case key_escape:
-            return al_key_down(&keystate, ALLEGRO_KEY_ESCAPE);
-            break;
-        default:
-            return false;
-    }
+bool Input::GetInput(int input){
+    bool res = false;
+        if(input & key_w)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_W);
+        if(input & key_a)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_A);
+        if(input & key_s)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_S);
+        if(input & key_d)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_D);
+        if(input & key_space)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_SPACE);
+        if(input & key_enter)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_ENTER);
+        if(input & key_rctrl)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_RCTRL);
+        if(input & key_lctrl)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_LCTRL);
+        if(input & key_escape)
+            res = res || al_key_down(&keystate, ALLEGRO_KEY_ESCAPE);
+        if(input & key_lmb)
+            res = res || al_mouse_button_down(&mousestate, 1);
+        if(input & key_rmb)
+            res = res || al_mouse_button_down(&mousestate, 2);
+    return res;
 }
 
 //--------------------------------------------------------------------------------

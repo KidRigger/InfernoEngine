@@ -16,15 +16,17 @@
 #include "vector3.hpp"
 
 enum key_code {
-    key_w = 0,
-    key_a,
-    key_s,
-    key_d,
-    key_space,
-    key_enter,
-    key_rctrl,
-    key_lctrl,
-    key_escape
+    key_w = 1,
+    key_a = 1<<1,
+    key_s = 1<<2,
+    key_d = 1<<3,
+    key_space = 1<<4,
+    key_enter = 1<<5,
+    key_rctrl = 1<<6,
+    key_lctrl = 1<<7,
+    key_escape = 1<<8,
+    key_lmb = 1<<9,
+    key_rmb = 1<<10
 };
 
 class Input
@@ -38,12 +40,13 @@ public:
     void ResetMouse(ALLEGRO_DISPLAY *disp);
     
     //For output of the axes
-    bool GetInput(key_code input);
+    bool GetInput(int input);
     
     Vector3 GetMousePosition(void);
     
 private:
     ALLEGRO_KEYBOARD_STATE keystate;
+    ALLEGRO_MOUSE_STATE mousestate;
     
     Vector3 mouse_origin;
     

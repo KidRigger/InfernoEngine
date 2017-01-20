@@ -21,6 +21,8 @@ private:
     TextHandler game_over_label;
     TextHandler score, score_label;
     TextHandler high_score, high_score_label;
+    TextHandler replay, exit;
+    int hsval;
 };
 
 #endif /* gameover_hpp */

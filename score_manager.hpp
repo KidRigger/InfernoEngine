@@ -37,11 +37,13 @@ public:
     
 private:
     ScoreManager();
-    ~ScoreManager() {texts.clear();}
+    ~ScoreManager() {
+        texts.clear();
+    }
     
-    std::map<std::string, TextHandler*> texts;
+    std::map<std::string, TextHandler> texts;
     
-    int score, max_score, lives;
+    int score, max_score, lives, live_index;
     
     static ScoreManager* thisInstance;
 };

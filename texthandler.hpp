@@ -25,7 +25,9 @@ class TextHandler {
 	int size, dim_size;
 
 public:
+    TextHandler() {}
 	TextHandler(Vector3 pos_vec, int num, int size = 20);
+    TextHandler(const TextHandler& copy_from);
 	TextHandler(Vector3 pos_vec, std::string str, int size = 20);
 	void SetString(std::string str);
 	void SetNum(int num);

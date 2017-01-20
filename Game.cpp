@@ -33,23 +33,27 @@ void Game::Init(int _screen_width, int _screen_height, float _frame_rate) {
     screenHeight = _screen_height;
     frameRate = _frame_rate;
     disp = al_create_display(_screen_width,_screen_height);
+    //if(full_screen)
+        al_set_display_flag(disp, ALLEGRO_FULLSCREEN, false);
     TheInput::Instance()->ResetMouse(disp);
     
     game_on = true;
     
     Renderer::render_init();
-    gameObjects.push_back(new Player(_screen_width/2,
-                                     _screen_height/2,
+}
+
+void Game::Start() {
+    gameObjects.push_back(new Player(screenWidth/2,
+                                     screenHeight/2,
                                      0
                                      )
                           );
     
     SpawnAsteroid(Vector3::RandomInRange(screenWidth/2,screenWidth/2+30)
-                    + Vector3(screenWidth/2, screenHeight/2));
+                  + Vector3(screenWidth/2, screenHeight/2));
     update_counter = 0;
     
     TheScoreManager::Instance()->Init(Vector3(20, 20), Vector3(screenWidth/2, 20), Vector3(20, 100));
-    
 }
 
 void Game::Update() {
@@ -68,7 +72,7 @@ bool Game::HandleEvents() {
     
     //std::cout <<std::endl;
     TheInput::Instance()->Update();
-    for(int i = 0; i != spawn_queue.size(); ++i)
+for(int i = 0; i != spawn_queue.size(); ++i)
     {
         spawn_queue[i]->ChangeID((int)gameObjects.size());
         gameObjects.push_back(spawn_queue[i]);
@@ -118,7 +122,18 @@ void Game::GameOver() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
     gameOver.Draw();
     al_flip_display();
-    while(TheInput::Instance()->Update());
+    while(TheInput::Instance()->Update()){
+        if (TheInput::Instance()->GetInput(key_enter)){
+            game_on = true;
+            while (gameObjects.size() != 1) {
+                delete gameObjects.back();
+                gameObjects.pop_back();
+            }
+            TheScoreManager::Instance()->Clean();
+            TheScoreManager::Instance()->Init(Vector3(20, 20), Vector3(screenWidth/2, 20), Vector3(20, 100));
+            break;
+        }
+    }
 }
 
 void Game::SpawnAsteroid(const Vector3& position,
@@ -128,7 +143,9 @@ void Game::SpawnAsteroid(const Vector3& position,
         velocity = Vector3(screenWidth/2,screenHeight/2)
                         + (Vector3::RandomInRange(screenHeight*0.66)
                         - position);
-    auto aster = new Asteroid(position, int(gameObjects.size()+spawn_queue.size()), velocity.Normalized()*150, r);
+    auto aster = new Asteroid(position,
+                              int(gameObjects.size()+spawn_queue.size()),
+                              velocity.Normalized()*150, r);
     aster->SetChildLevel(lvl);
     spawn_queue.push_back(aster);
 }
@@ -141,9 +158,8 @@ void Game::SpawnShot(const Vector3& position, Vector3 velocity) {
 }
 
 void Game::Clean() {
-    while(!gameObjects.empty()){
-        delete gameObjects.back();
-        gameObjects.pop_back();
+    for(auto it = gameObjects.begin(); it != gameObjects.end(); ++it){
+        delete *it;
     }
-    delete thisInstance;
+    gameObjects.clear();
 }
