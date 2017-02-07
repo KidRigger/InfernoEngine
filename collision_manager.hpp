@@ -13,9 +13,17 @@
 #include "Projectile.hpp"
 #include "object.hpp"
 
+/*
+ * Collider namespace containing collision functions...
+ * ...usable with the Inferno Objects classes
+ * Use Position-Radius method to check for collision
+ */
+
 namespace Collider {
+    /* Checks for collisions among all the objects in the vector obj */
     bool CollisionCheck(std::vector<Object*> &obj);
-    bool OnScreen(Object* obj);
-    bool OnScreen(Object& obj);
+    /* Checks if the object obj is on the screen */
+    bool OnScreen(Object* obj);     //Pointer Version
+    bool OnScreen(Object& obj);     //Reference Version
 };
 #endif /* collision_manager_hpp */

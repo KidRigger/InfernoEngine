@@ -70,6 +70,10 @@ void Player::Update(float dt){
         flame=false;
     }
     
+    if(TheInput::Instance()->GetInput(key_e)){
+        pos = Vector3::RandomInRange(TheGame::Instance()->GetScreenWidth());
+    }
+    
     vel = vel + acc * dt/2;
     pos = pos + vel * dt;
     vel = vel + acc * dt/2;

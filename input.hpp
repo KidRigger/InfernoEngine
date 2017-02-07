@@ -26,7 +26,8 @@ enum key_code {
     key_lctrl = 1<<7,
     key_escape = 1<<8,
     key_lmb = 1<<9,
-    key_rmb = 1<<10
+    key_rmb = 1<<10,
+    key_e = 1<<11
 };
 
 class Input

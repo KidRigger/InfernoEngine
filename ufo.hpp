@@ -17,6 +17,12 @@
 #include <time.h>
 #include "object.hpp"
 
+/*
+ * UFO is the main 'enemy' in asteroids
+ * Two types of asteroid, small and large
+ * Large has a different shooting method as compared to the small one.
+ */
+
 class Ufo : public Object {
 public:
 	Ufo(const Vector3& pos_vec, const Vector3& velo, float radius = 20);

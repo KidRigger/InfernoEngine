@@ -1,4 +1,4 @@
-﻿//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
 //
 //  texthandler.cpp
 //  InfernoEngine
@@ -9,8 +9,15 @@
 //--------------------------------------------------------------------------------
 
 #include "texthandler.hpp"
+#include <sstream>
 
-TextHandler::TextHandler(Vector3 pos_vec, int num, int size):pos_vec(pos_vec),num(num),dim_size(size) {
+/* 
+ * Constructor:
+ * { Numeric }
+ * Creates and stores the size and numeric value of the objects.
+ * Along with the position of display on the screen.
+ */
+TextHandler::TextHandler(Vector3 pos_vec, int num, int size):pos_vec(pos_vec),dim_size(size) {
 
 	std::stringstream stringy;
 	stringy << num;
@@ -24,6 +31,12 @@ TextHandler::TextHandler(Vector3 pos_vec, int num, int size):pos_vec(pos_vec),nu
 
 //--------------------------------------------------------------------------------
 
+/*
+ * Constructor:
+ * { Text }
+ * Stores the position, and text to be displayed
+ * Also stores the size.
+ */
 TextHandler::TextHandler(Vector3 pos_vec, std::string str, int size) :
 	pos_vec(pos_vec), str(str),dim_size(size) {
 
@@ -37,6 +50,9 @@ TextHandler::TextHandler(Vector3 pos_vec, std::string str, int size) :
 
 //--------------------------------------------------------------------------------
 
+/*
+ * Sets the numerical value of the element
+ */
 void TextHandler::SetNum(int num) {
 	size = (int)str.size();
 
@@ -63,6 +79,9 @@ void TextHandler::SetNum(int num) {
 
 //--------------------------------------------------------------------------------
 
+/* 
+ * Sets the string value of the element.
+ */
 void TextHandler::SetString(std::string str) {
 	int ds = (int)str.size() - size;
 	if (ds > 0) {
@@ -84,6 +103,9 @@ void TextHandler::SetString(std::string str) {
 
 //--------------------------------------------------------------------------------
 
+/*
+ * Draws the UI element on the screen at the specified location
+ */
 void TextHandler::Draw() {
 	for (auto it = t.begin(); it != t.end(); ++it)
 		it->Draw();

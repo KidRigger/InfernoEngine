@@ -10,17 +10,57 @@
 
 #include "text.hpp"
 
+static const int thick = 3;
+
+/*
+ * The coordinates of the different points that bmake up the lines...
+ * ...in the numbers
+ * Each line represents an LED from a 7 signal display
+ */
+const static Vector3 line[7][2] = { { Vector3(1,1),Vector3(1,0) },
+    { Vector3(1,0),Vector3(0,0) },
+    { Vector3(0,0),Vector3(0,1) },
+    { Vector3(0,1),Vector3(0,2) },
+    { Vector3(0,2),Vector3(1,2) },
+    { Vector3(1,2),Vector3(1,1) },
+    { Vector3(1,1),Vector3(0,1) }
+};
+
+/*
+ * Line-states for each LED line of the 7 signal display...
+ * ...according to which the lines are drawn or not drawn.
+ */
+const static bool numbers[10][7] = {
+    {  true,  true,  true,  true,  true,  true, false },
+    {  true, false, false, false, false,  true, false },
+    {  true,  true, false,  true,  true, false,  true },
+    {  true,  true, false, false,  true,  true,  true },
+    {  true, false,  true, false, false,  true,  true },
+    { false,  true,  true, false,  true,  true,  true },
+    { false,  true,  true,  true,  true,  true,  true },
+    {  true,  true, false, false, false,  true, false },
+    {  true,  true,  true,  true,  true,  true,  true },
+    {  true,  true,  true, false,  true,  true,  true }
+};
+
+//--------------------------------------------------------------------------------
+
+/*
+ * Constructor
+ */
 Text::Text(Vector3 pos_vec, char ch, float size):
 pos_vec(pos_vec), ch(ch), size(size) {}
 
 //--------------------------------------------------------------------------------
 
+/* Sets the character to be dislayed */
 void Text::SetChar(char ch) {
     this->ch = ch;
 }
 
 //--------------------------------------------------------------------------------
 
+/* shorthand line drawer */
 void Text::l(float i, float j, float p, float q) {
 	Renderer::draw_line(pos_vec + Vector3(i,j) * size * 0.5,
                         pos_vec + Vector3(p,q) * size * 0.5,
@@ -29,6 +69,7 @@ void Text::l(float i, float j, float p, float q) {
 
 //--------------------------------------------------------------------------------
 
+/* Draws the text onto the screen */
 void Text::Draw() {
     if(ch >= '0' && ch <= '9') {
         for (int i = 0; i < 7; ++i) {

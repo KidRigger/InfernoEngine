@@ -20,7 +20,6 @@ public:
     static Game* Instance(void);
     
     void Init(int _screen_height, int _screen_width, float _frame_rate);
-    
     void Start(void);
     void Update(void);
     bool HandleEvents(void);
