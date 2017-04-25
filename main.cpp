@@ -15,7 +15,6 @@
 int main(int argc, char ** argv) {
     
     //Game loop goes here
-    
     TheGame::Instance()->Init(1440,900,60);
     TheGame::Instance()->Start(); 
     while(TheGame::Instance()->HandleEvents()){

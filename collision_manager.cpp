@@ -1,4 +1,4 @@
-   //
+//
 //  collision_manager.cpp
 //  InfernoEngine
 //
@@ -26,20 +26,26 @@ namespace Collider {
             Vector3 pos_o = (*iter)->GetPosition();
             // for loop to check with all the remaining objects
             for(auto it = iter+1; it != obj.end(); ++it){
+                
                 // Checks if the objects are of the same type...
                 // ...collision between 2 objects of same type...
                 // ...is ignored
-                if( (*iter)->getTypeInt() != (*it)->getTypeInt()) {
-                    float r = ro+(*it)->GetRadius();
-                    // Compares square of magnitude instad of magnitude...
-                    // ...so that it saves the call to sqrt()
-                    if(r*r > (pos_o - (*it)->GetPosition()).SqrMagnitude()){
-                        int a = (*iter)->GetID();
-                        int b = (*it)->GetID();
-                        // Uses TheGame singleton to call hit to object a
-                        TheGame::Instance()->CallHit(a);
-                        TheGame::Instance()->CallHit(b);
-                        return true;
+                
+                if( (*iter)->getTypeInt() != (*it)->getTypeInt()
+                   && (*iter)->getTypeInt()*(*it)->getTypeInt() != 6 ) {
+                    
+                    if((*iter)->owner() != (*it)->owner()) {
+                        float r = ro+(*it)->GetRadius();
+                        // Compares square of magnitude instad of magnitude...
+                        // ...so that it saves the call to sqrt()
+                        if(r*r > (pos_o - (*it)->GetPosition()).SqrMagnitude()){
+                            int a = (*iter)->GetID();
+                            int b = (*it)->GetID();
+                            // Uses TheGame singleton to call hit to object a
+                            TheGame::Instance()->CallHit(a);
+                            TheGame::Instance()->CallHit(b);
+                            return true;
+                        }
                     }
                 }
             }

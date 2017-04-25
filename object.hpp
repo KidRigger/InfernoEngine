@@ -27,6 +27,7 @@ public:
     virtual ~Object(void) {};
     // Should return an integer that gives the type of the object
     virtual int getTypeInt(void) { return 0; }
+    virtual int owner(void){return 0;}
 };
 
 #endif

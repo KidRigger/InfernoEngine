@@ -4,6 +4,7 @@
 //  InfernoEngine
 //
 //  Created by Anish Bhobe on 12/9/16.
+//  Completed by Anish Bhobe on 04/25/17
 //  Copyright © 2016 Anish Bhobe. All rights reserved.
 //
 //--------------------------------------------------------------------------------
@@ -78,6 +79,9 @@ void Player::Update(float dt){
     pos = pos + vel * dt;
     vel = vel + acc * dt/2;
     
+    // Players location wraps around the screen.
+    // If player exits from the right, it enter at the right.
+    // And vice versa
     if(pos.GetX() > TheGame::Instance()->GetScreenWidth()) {
         pos.SetValue(0, pos.GetY(), pos.GetZ());
     }
@@ -96,6 +100,7 @@ void Player::Update(float dt){
         vel = vel - player_thrust*vel.Normalized()*dt/3;
     }
     
+    // Checks for the shooting. Checks if player is shooting and shoots.
     this->LookAt(TheInput::Instance()->GetMousePosition());
     if(TheInput::Instance()->GetInput(key_lctrl | key_lmb)){
         this->Shoot();
@@ -117,7 +122,7 @@ void Player::LookAt(const Vector3& target) {
 void Player::Shoot(void){
     if(shot_count < 15)
         return;
-    TheGame::Instance()->SpawnShot(pos + relative_pts[0]*2, relative_pts[0].Normalized()*300);
+    TheGame::Instance()->SpawnShot(1, pos + relative_pts[0]*2, relative_pts[0].Normalized()*300);
     shot_count = 0;
 }
 

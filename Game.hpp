@@ -41,9 +41,14 @@ public:
     void SpawnAsteroid(const Vector3& position,
                        Vector3 direction = Vector3(),
                        float r = 0, int lvl = 0);
-    void SpawnShot(const Vector3& position,
+    void SpawnUfo(const Vector3& position,
+                       Vector3 direction = Vector3(),
+                       float r = 0);
+    void SpawnShot(int owner, const Vector3& position,
                    Vector3 velocity);
     void Destroy(int id);
+    
+    Vector3 playerLoc(){return gameObjects[0]->GetPosition();}
     
 private:
     

@@ -4,6 +4,7 @@
 //  InfernoEngine
 //
 //  Created by Anish Bhobe on 12/9/16.
+//  Completed by Anish Bhobe on 04/25/17
 //  Copyright © 2016 Anish Bhobe. All rights reserved.
 //
 //--------------------------------------------------------------------------------
@@ -45,6 +46,7 @@ public:
     void ChangeID(int id) {this->id = id;}
     
     int getTypeInt(void) { return 1; }
+    int owner(void){return 1;}
     
 private:
     int id;

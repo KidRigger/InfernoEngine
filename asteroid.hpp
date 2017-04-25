@@ -35,6 +35,7 @@ public:
     void ChangeID(int id);
     
     int getTypeInt(void) { return 3; }
+    int owner(void){return 3;}
     
     void Destroy();
 

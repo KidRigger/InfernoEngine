@@ -20,13 +20,13 @@
 Vector3 Asteroid::shape[3][10] = {
 	{   Vector3(0.5,1.5), Vector3(1.5,1), Vector3(1,0.5), Vector3(2.5,0),
 		Vector3(1.5,-1), Vector3(0.5,-1.5), Vector3(-1,-1), Vector3(-1,0),
-		Vector3(-1.5,1), Vector3(-0.5,1)},
+		Vector3(-1.5,1), Vector3(-0.5,1)  },
 	{   Vector3(0,2), Vector3(2,1), Vector3(2,-0.5), Vector3(1.5,-1.5),
 		Vector3(0,-2), Vector3(-1.5,-1), Vector3(-1,-1), Vector3(-2,1),
 		Vector3(-0.5,0.5), Vector3(-1,1.5) },
 	{   Vector3(-0.5,2), Vector3(0.5,1.5), Vector3(1.5,2), Vector3(1,0.5),
 		Vector3(1.5,-0.5), Vector3(1.5,-1.5), Vector3(0.5,-1), Vector3(0,-2),
-		Vector3(-1.5,0), Vector3(-1.5,1.5)} };
+		Vector3(-1.5,0), Vector3(-1.5,1.5) } };
 
 //--------------------------------------------------------------------------------
 

@@ -13,8 +13,8 @@
 
 //--------------------------------------------------------------------------------
 
-Shot::Shot(const Vector3& position, const Vector3& velocity, int id, float radius):
-pos(position), vel(velocity), id(id), rad(radius) {}
+Shot::Shot(int owner, const Vector3& position, const Vector3& velocity, int id, float radius):
+pos(position), vel(velocity), id(id), rad(radius), owner_type_int(owner) {}
 
 void Shot::ChangeID(int id){
     this->id = id;

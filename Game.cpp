@@ -16,6 +16,7 @@
 #include "input.hpp"
 #include "score_manager.hpp"
 #include "shots.hpp"
+#include "ufo.hpp"
 #include <allegro5/allegro_primitives.h>
 
 Game* Game::thisInstance = nullptr;
@@ -32,9 +33,9 @@ void Game::Init(int _screen_width, int _screen_height, float _frame_rate) {
     screenWidth = _screen_width;
     screenHeight = _screen_height;
     frameRate = _frame_rate;
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
     disp = al_create_display(_screen_width,_screen_height);
     //if(full_screen)
-        al_set_display_flag(disp, ALLEGRO_FULLSCREEN, false);
     TheInput::Instance()->ResetMouse(disp);
     
     game_on = true;
@@ -48,7 +49,6 @@ void Game::Start() {
                                      0
                                      )
                           );
-    
     SpawnAsteroid(Vector3::RandomInRange(screenWidth/2,screenWidth/2+30)
                   + Vector3(screenWidth/2, screenHeight/2));
     update_counter = 0;
@@ -62,8 +62,11 @@ void Game::Update() {
         (*it)->Update(1.0/frameRate);
     }
     if((++update_counter)%((int)(frameRate)) == 0) {
-        update_counter = 0;
         SpawnAsteroid(Vector3::RandomInRange(screenWidth/2+60,screenWidth/2+120) + Vector3(screenWidth/2, screenHeight/2));
+        if((update_counter%(int)(10*frameRate)) == 0){
+            SpawnUfo(Vector3::RandomInRange(screenWidth/2+60,screenWidth/2+120) + Vector3(screenWidth/2, screenHeight/2));
+            update_counter = 0;
+        }
     }
     TheScoreManager::Instance()->Update();
 }
@@ -150,8 +153,21 @@ void Game::SpawnAsteroid(const Vector3& position,
     spawn_queue.push_back(aster);
 }
 
-void Game::SpawnShot(const Vector3& position, Vector3 velocity) {
-    auto sho = new Shot(position, velocity,
+void Game::SpawnUfo(const Vector3& position,
+                         Vector3 velocity,
+                         float r) {
+    if(velocity.SqrMagnitude() == 0)
+        velocity = Vector3(screenWidth/2,screenHeight/2)
+        + (Vector3::RandomInRange(screenHeight*0.66)
+           - position);
+    auto ufo = new Ufo(position,
+                              int(gameObjects.size()+spawn_queue.size()),
+                              velocity.Normalized()*150, r, 3*(int)frameRate);
+    spawn_queue.push_back(ufo);
+}
+
+void Game::SpawnShot(int owner, const Vector3& position, Vector3 velocity) {
+    auto sho = new Shot(owner, position, velocity,
                         int(gameObjects.size()+spawn_queue.size())
                         );
     spawn_queue.push_back(sho);

@@ -14,7 +14,7 @@
 
 class Shot : public Object {
 public:
-    Shot (const Vector3& position, const Vector3& velocity,
+    Shot (int owner, const Vector3& position, const Vector3& velocity,
           int id, float radius = 1);
     ~Shot(void) { Object::~Object(); }
     void Hit(void);
@@ -28,13 +28,14 @@ public:
     int GetID(void) const;
     
     int getTypeInt(void) { return 4; }
+    int owner(void){return owner_type_int;}
     
 private:
     void Destroy(void);
     //bool reg_hit;
     Vector3 pos, vel;
     float rad;
-    int id;
+    int id, owner_type_int;
 };
 
 
